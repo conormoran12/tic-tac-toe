@@ -65,6 +65,8 @@ body {
     font-size: 5rem;
     color: #457dff;
     font-weight: 600;
+    user-select: none;
+    cursor: pointer;
 }
 
 .field:nth-child(1) {
