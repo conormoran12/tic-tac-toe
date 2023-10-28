@@ -22,7 +22,7 @@ body {
 
 .navigation-bar {
     display: flex;
-    padding: 25px 50px;
+    padding: 25px 75px;
     height: clamp(25px, 50px, 50px);
 }
 
@@ -34,15 +34,16 @@ body {
 
 .game-container {
     display: grid;
-    justify-items: center;
+    justify-items: start;
     align-items: center;
     height: 100vh;
     grid-gap: 50px;
     grid-template-columns: 0.375fr 0.625fr;
-    padding: 0 20px;
+    padding: 0 75px;
 }
 
-.player-name, .character {
+.player-name,
+.character {
     color: #FFFFFF;
 }
 
@@ -52,7 +53,7 @@ body {
     height: clamp(350px, 500px, 500px);
     grid-template-rows: repeat(3, 1fr);
     grid-template-columns: repeat(3, 1fr);
-    box-shadow: 0 0 33px rgba(0,0,0, 25%);
+    box-shadow: 0 0 33px rgba(0, 0, 0, 25%);
     justify-self: start;
     border-radius: 28px;
     background: #F9F9F9;
@@ -62,16 +63,19 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    background: #FFFFFF;
     font-size: 5rem;
     color: #457dff;
     font-weight: 600;
     user-select: none;
     cursor: pointer;
+    transition: 0.3s;
 }
 
 .field:nth-child(1) {
     border-right: var(--grid-border-color);
     border-bottom: var(--grid-border-color);
+    border-top-left-radius: 28px;
 }
 
 .field:nth-child(2) {
@@ -81,6 +85,7 @@ body {
 .field:nth-child(3) {
     border-left: var(--grid-border-color);
     border-bottom: var(--grid-border-color);
+    border-top-right-radius: 28px;
 }
 
 .field:nth-child(4) {
@@ -94,6 +99,7 @@ body {
 .field:nth-child(7) {
     border-right: var(--grid-border-color);
     border-top: var(--grid-border-color);
+    border-bottom-left-radius: 28px;
 }
 
 .field:nth-child(8) {
@@ -103,20 +109,23 @@ body {
 .field:nth-child(9) {
     border-left: var(--grid-border-color);
     border-top: var(--grid-border-color);
+    border-bottom-right-radius: 28px;
 }
 
 
 .scoreboard {
     display: flex;
     flex-direction: column;
-    box-shadow: 0 0 46px -12px rgba(0,0,0, 25%);
+    user-select: none;
+    box-shadow: 0 0 46px -12px rgba(0, 0, 0, 25%);
     width: 450px;
     justify-content: center;
     align-items: center;
     border-radius: 20px;
 }
 
-.player1, .player2 {
+.player1,
+.player2 {
     display: grid;
     width: 450px;
     height: 75px;
@@ -135,7 +144,8 @@ body {
     border-bottom-right-radius: 20px;
 }
 
-.player1 > div, .player2 > div {
+.player1>div,
+.player2>div {
     display: flex;
     align-items: center;
     font-size: 2.5rem;
@@ -144,22 +154,23 @@ body {
 
 .character {
     background: #2D2D2D;
-    text-shadow: 0 0 23px rgba(0,0,0, 25%);
+    text-shadow: 0 0 23px rgba(0, 0, 0, 25%);
+    transition: 0.3s;
 }
 
-.player1 > .character {
+.player1>.character {
     border-top-left-radius: 20px;
 }
 
-.player2 > .character {
+.player2>.character {
     border-bottom-left-radius: 20px;
 }
 
-.player1 > .player-score {
+.player1>.player-score {
     border-top-right-radius: 20px;
 }
 
-.player2 > .player-score {
+.player2>.player-score {
     border-bottom-right-radius: 20px;
 }
 
@@ -168,7 +179,8 @@ body {
     background: #FFFFFF;
 }
 
-.character, .player-score {
+.character,
+.player-score {
     justify-content: center;
 }
 
@@ -180,10 +192,70 @@ body {
     background: #003EDC;
 }
 
+#plr2_score {
+    background: #f3f3f3;
+}
+
 #x {
     background: #343434;
 }
 
 #o {
     background: #2D2D2D;
+}
+
+.field:hover {
+    background: #dcebff;
+    transition: 0.3s;
+}
+
+button {
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+    user-select: none;
+}
+
+.option-container {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+}
+
+.option-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 150px;
+    height: 50px;
+    padding: 7.25px 12.5px;
+    background: #FFFFFF;
+    color: #67A4FF;
+    font-weight: 700;
+    font-size: 1.1rem;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(12, 24, 207, 25%);
+    transition: 0.3s;
+    margin-top: 20px;
+}
+
+.option-button:hover {
+    background: rgb(129, 175, 255);
+    color: #FFFFFF;
+    transition: 0.3s;
+}
+
+.commentary-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2rem;
+    font-size: 2rem;
+    color: #6a79ff;
+    font-weight: 700;
+    transition: 0.3s;
 }
