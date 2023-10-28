@@ -9,6 +9,14 @@ const player2 = player("Player2", "O");
 
 document.querySelector("#x").style.backgroundColor = "#FFC700"
 
+function transitionAfterPageLoad() {
+    document.getElementById("body").classList.remove("no-transition");
+}
+
+(function() {
+    transitionAfterPageLoad();
+})()
+
 const gameBoard = (function () {
     this.boxes = { 1: "", 2: "", 3: "", 4: "", 5: "", 6: "", 7: "", 8: "", 9: "" }
     this.currentPlayer = player1;
@@ -23,7 +31,6 @@ const gameBoard = (function () {
     }
 
     this.setWinner = (plr) => {
-        console.log(plr);
         if (plr != "" && plr != "Draw") {
             this.winner = plr;
             this.scoreIncrement(plr);
@@ -46,41 +53,38 @@ const gameBoard = (function () {
 
     this.showOptionButtons = (nextRound, restart) => {
         if (nextRound == true && restart == true) {
-            console.log("Next round is true and restart is true");
-            document.querySelector("#next_round_button").style.display = null;
-            document.querySelector("#next_round_button").style.cursor = "pointer";
-            document.querySelector("#next_round_button").style.opacity = 1;
-            document.querySelector("#next_round_button").disabled = false;
+            setTimeout(() => {
+                document.querySelector("#next_round_button").style.display = null;
+                document.querySelector("#next_round_button").style.cursor = "pointer";
+                document.querySelector("#next_round_button").style.opacity = 1;
+                document.querySelector("#next_round_button").disabled = false;
 
-            document.querySelector("#restart_button").style.display = null;
-            document.querySelector("#restart_button").style.cursor = "pointer";
-            document.querySelector("#restart_button").style.opacity = 1;
-            document.querySelector("#restart_button").disabled = false;
+                document.querySelector("#restart_button").style.display = null;
+                document.querySelector("#restart_button").style.cursor = "pointer";
+                document.querySelector("#restart_button").style.opacity = 1;
+                document.querySelector("#restart_button").disabled = false;
+            }, 300);
         } else if (nextRound == false && restart == true) {
-            console.log("Next round is false and restart is true");
-            document.querySelector("#next_round_button").style.display = "none";
-            document.querySelector("#next_round_button").style.cursor = "auto";
-            document.querySelector("#next_round_button").style.opacity = 0;
-            document.querySelector("#next_round_button").disabled = true;
+            setTimeout(() => {
+                document.querySelector("#next_round_button").style.display = "none";
+                document.querySelector("#next_round_button").style.cursor = "auto";
+                document.querySelector("#next_round_button").style.opacity = 0;
+                document.querySelector("#next_round_button").disabled = true;
 
-            document.querySelector("#restart_button").style.display = null;
-            document.querySelector("#restart_button").style.cursor = "pointer";
-            document.querySelector("#restart_button").style.opacity = 1;
-            document.querySelector("#restart_button").disabled = false;
+                document.querySelector("#restart_button").style.display = null;
+                document.querySelector("#restart_button").style.cursor = "pointer";
+                document.querySelector("#restart_button").style.opacity = 1;
+                document.querySelector("#restart_button").disabled = false;
+            }, 300);
         }
         else if (nextRound == false && restart == false) {
-            console.log("Next round is false and restart is false");
-            console.log("\"" + "Next Round Button Disabled: " + document.querySelector("#next_round_button").disabled + "\"")
-            console.log("\"" + "Restart Button Disabled: " + document.querySelector("#restart_button").disabled + "\"\n")
             if (document.querySelector("#next_round_button").disabled == true && document.querySelector("#restart_button").disabled == false) {
-                console.log("Hello");
                 setTimeout(() => {
-                    console.log("hello")
                     document.querySelector("#next_round_button").style.display = null;
                     document.querySelector("#next_round_button").style.cursor = "auto";
                     document.querySelector("#next_round_button").style.opacity = 0;
                     document.querySelector("#next_round_button").disabled = true;
-                }, 1000);
+                }, 300);
             } else {
                 document.querySelector("#next_round_button").style.display = null;
                 document.querySelector("#next_round_button").style.cursor = "auto";
@@ -92,8 +96,6 @@ const gameBoard = (function () {
             document.querySelector("#restart_button").style.cursor = "auto";
             document.querySelector("#restart_button").style.opacity = 0;
             document.querySelector("#restart_button").disabled = true;
-
-
         }
     }
 
@@ -149,10 +151,17 @@ const gameBoard = (function () {
         for (let i = 1; i <= Object.keys(this.boxes).length; i++) {
             this.boxes[i] = "";
         }
-        document.querySelectorAll(".field").forEach((element) => {
-            element.textContent = "";
+        document.querySelectorAll("#field").forEach((element) => {
+            element.style.opacity = 0;
+            //element.textContent = "";
         })
-        this.setWinner("");
+
+        setTimeout(() => {
+            document.querySelectorAll("#field").forEach((element) => {
+                element.textContent = "";
+            })
+            this.setWinner("");
+        }, 150);
     }
 
     this.checkLogic = () => {
@@ -192,10 +201,11 @@ const gameBoard = (function () {
 
 const displayController = (function () {
     this.setMarker = (element, currentPlr) => {
-        for (let i = 0; i < document.querySelectorAll(".field").length; i++) {
-            if (document.querySelectorAll(".field")[i] == element && gameBoard.boxes[i + 1] == "") {
+        for (let i = 0; i < document.querySelectorAll("#field").length; i++) {
+            if (document.querySelectorAll("#field")[i] == element && gameBoard.boxes[i + 1] == "") {
+                document.querySelectorAll("#field")[i].style.opacity = 1;
                 gameBoard.boxes[i + 1] = currentPlr.char;
-                document.querySelectorAll(".field")[i].innerHTML = currentPlr.char;
+                document.querySelectorAll("#field")[i].innerHTML = currentPlr.char;
                 gameBoard.setCurrentPlayer();
             }
         }
@@ -203,7 +213,7 @@ const displayController = (function () {
     return { setMarker };
 })();
 
-document.querySelectorAll(".field").forEach(element => {
+document.querySelectorAll("#field").forEach(element => {
     element.addEventListener("mouseup", (event => {
         if (gameBoard.getWinner() == "") {
             displayController.setMarker(element, gameBoard.getCurrentPlayer());

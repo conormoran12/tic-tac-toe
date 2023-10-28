@@ -11,10 +11,10 @@
     <!--  -->
     <title>Tic Tac Toe</title>
 </head>
-<body>
+<body id="body" class="no-transition">
     <div class="main-container">
         <nav class="navigation-bar">
-            <div class="heading">Tic Tac Toe</div>
+            <div class="heading"><img class="tic-tac-toe-logo" src="images/grid.svg">Tic Tac Toe</div>
         </nav>
         <div class="game-container">
             <div class="scoreboard">
@@ -32,15 +32,15 @@
             <div class="play-container">
                 <div class="commentary-text" style="opacity: 0;">&nbsp;</div>
                 <div class="game-grid">
-                    <div class="field"></div>
-                    <div class="field"></div>
-                    <div class="field"></div>
-                    <div class="field"></div>
-                    <div class="field"></div>
-                    <div class="field"></div>
-                    <div class="field"></div>
-                    <div class="field"></div>
-                    <div class="field"></div>
+                    <div class="field"><span id="field" style="opacity: 0;"></span></div>
+                    <div class="field"><span id="field" style="opacity: 0;"></span></div>
+                    <div class="field"><span id="field" style="opacity: 0;"></span></div>
+                    <div class="field"><span id="field" style="opacity: 0;"></span></div>
+                    <div class="field"><span id="field" style="opacity: 0;"></span></div>
+                    <div class="field"><span id="field" style="opacity: 0;"></span></div>
+                    <div class="field"><span id="field" style="opacity: 0;"></span></div>
+                    <div class="field"><span id="field" style="opacity: 0;"></span></div>
+                    <div class="field"><span id="field" style="opacity: 0;"></span></div>
                 </div>
                 <div class="option-container">
                     <button class="option-button" id="next_round_button" style="opacity: 0;">Next round</button>
